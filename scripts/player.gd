@@ -9,20 +9,30 @@ extends RigidBody3D
 ##How much delay is between crashing/winning and it's sequence
 @export var tween_wait_time : float = 2.0
 
+#VFX imports
+@onready var booster_particles: GPUParticles3D = $BoosterParticles
+@onready var success_particles: GPUParticles3D = $SuccessParticles
+@onready var explosion_particles: GPUParticles3D = $ExplosionParticles
 
+#SFX imports
 @onready var explosion_audio: AudioStreamPlayer = $ExplosionAudio
 @onready var success_audio: AudioStreamPlayer = $SuccessAudio
 @onready var rocket_audio: AudioStreamPlayer = $RocketAudio
+
+#Variables
 var is_active : bool = true
+var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 
 func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("action"):
 		apply_central_force(basis.y * delta * acceleration_speed)
-		if rocket_audio.playing == false:
-			rocket_audio.play()
+		booster_particles.emitting = true
+		if not rocket_audio.playing:
+			_play_pitch_audio(rocket_audio)
 	else:
+		booster_particles.emitting = false
 		rocket_audio.stop()
 		
 	if Input.is_action_pressed("right"):
@@ -34,14 +44,18 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if is_active:
 		if body.is_in_group("goal"):
+			booster_particles.emitting = false
+			rocket_audio.stop()
 			win_sequence(body.file_path)
 
 		if body.is_in_group("fail"):
+			booster_particles.emitting = false
+			rocket_audio.stop()
 			crash_sequence()
 		
 func win_sequence(next_level_file : String) -> void:
 	is_active = false
-	print("You've won!")
+	success_particles.emitting = true
 	success_audio.play()
 	set_process(false)
 	var tween : Tween = create_tween()
@@ -50,7 +64,7 @@ func win_sequence(next_level_file : String) -> void:
  		
 func crash_sequence() -> void:
 	is_active = false
-	print("KABOOM! You've lost!")
+	explosion_particles.emitting = true    
 	explosion_audio.play()
 	set_process(false)
 	var tween : Tween = create_tween()
@@ -62,3 +76,7 @@ func _change_scene(next_level_file : String) -> void:
 	
 func _restart_scene() -> void:
 	get_tree().reload_current_scene()
+	
+func _play_pitch_audio(audio : AudioStreamPlayer) -> void:
+	audio.pitch_scale = rng.randf_range(0.8, 1.2)
+	audio.play()

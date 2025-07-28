@@ -1,10 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bss7x2rdftbpm"]
+[gd_scene load_steps=10 format=3 uid="uid://bss7x2rdftbpm"]
 
 [ext_resource type="Script" uid="uid://ckfbkgfu2fsav" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="ArrayMesh" uid="uid://dsjbstq7kjg1f" path="res://assets/raketa-lighter.obj" id="2_g2els"]
 [ext_resource type="AudioStream" uid="uid://bh32pxsuogf0e" path="res://assets/SFX/SFX - Death Explosion.ogg" id="3_dqkch"]
 [ext_resource type="AudioStream" uid="uid://bb1uouxigal5o" path="res://assets/SFX/SFX - Success.ogg" id="4_qlg0r"]
 [ext_resource type="AudioStream" uid="uid://c1uvsx2ckb36l" path="res://assets/SFX/SFX - Main engine thrust.ogg" id="5_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://ux6ivcx1ovdp" path="res://scenes/Particles/booster_particles.tscn" id="6_tuyoq"]
+[ext_resource type="PackedScene" uid="uid://co36sy4lfy3l" path="res://scenes/Particles/success_particles.tscn" id="7_smehm"]
+[ext_resource type="PackedScene" uid="uid://dcs11imexb86y" path="res://scenes/Particles/explosion_particles.tscn" id="8_ur7pv"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_g2els"]
 height = 3.07471
@@ -36,5 +39,14 @@ stream = ExtResource("4_qlg0r")
 
 [node name="RocketAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_qlg0r")
+
+[node name="BoosterParticles" parent="." instance=ExtResource("6_tuyoq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0.199)
+
+[node name="SuccessParticles" parent="." instance=ExtResource("7_smehm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="ExplosionParticles" parent="." instance=ExtResource("8_ur7pv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
