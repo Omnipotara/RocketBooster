@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dui5vs41dsjag"]
+
+[ext_resource type="Script" uid="uid://b5eo01b8bfkqb" path="res://scripts/moving_obstacle.gd" id="1_18cu4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jw2ww"]
+albedo_color = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_18cu4"]
+material = SubResource("StandardMaterial3D_jw2ww")
+size = Vector3(3, 3, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lj30i"]
+
+[node name="MovingObstacle" type="AnimatableBody3D"]
+script = ExtResource("1_18cu4")
+destination = Vector3(0, 2, 0)
+duration = 1.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("BoxMesh_18cu4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1.5, 0)
+shape = SubResource("BoxShape3D_lj30i")
