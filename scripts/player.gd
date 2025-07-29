@@ -24,6 +24,7 @@ var is_active : bool = true
 var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 
+
 func _process(delta: float) -> void:
 
 	if Input.is_action_pressed("action"):
@@ -44,8 +45,6 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node) -> void:
 	if is_active:
 		if body.is_in_group("goal"):
-			booster_particles.emitting = false
-			rocket_audio.stop()
 			win_sequence(body.file_path)
 
 		if body.is_in_group("fail"):
@@ -54,6 +53,8 @@ func _on_body_entered(body: Node) -> void:
 			crash_sequence()
 		
 func win_sequence(next_level_file : String) -> void:
+	booster_particles.emitting = false
+	rocket_audio.stop()
 	is_active = false
 	success_particles.emitting = true
 	success_audio.play()

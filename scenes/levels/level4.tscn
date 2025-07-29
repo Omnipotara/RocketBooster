@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://bumiv27crq4xc" path="res://scripts/landing_pad.gd" id="1_eh8f3"]
 [ext_resource type="PackedScene" uid="uid://bss7x2rdftbpm" path="res://scenes/player.tscn" id="2_fjlvv"]
-[ext_resource type="PackedScene" uid="uid://dui5vs41dsjag" path="res://scenes/moving_obstacle.tscn" id="3_fjlvv"]
+[ext_resource type="PackedScene" uid="uid://dui5vs41dsjag" path="res://scenes/levels/moving_obstacle.tscn" id="3_fjlvv"]
 [ext_resource type="PackedScene" uid="uid://xqffxgrqigsh" path="res://scenes/levels/background.tscn" id="4_o34q2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2q6dc"]

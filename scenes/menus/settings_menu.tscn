@@ -1,0 +1,89 @@
+[gd_scene load_steps=5 format=3 uid="uid://5ui3esnmfxbw"]
+
+[ext_resource type="Script" uid="uid://b5wn82r5p3wxb" path="res://scripts/settings_menu.gd" id="1_hayap"]
+
+[sub_resource type="Animation" id="Animation_2o76q"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ovrgc"]
+resource_name = "fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6bivr"]
+_data = {
+&"RESET": SubResource("Animation_2o76q"),
+&"fade_in": SubResource("Animation_ovrgc")
+}
+
+[node name="SettingsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hayap")
+
+[node name="Fade" type="ColorRect" parent="."]
+z_index = 10
+layout_mode = 0
+offset_left = -4.0
+offset_right = 1160.0
+offset_bottom = 651.0
+color = Color(0, 0, 0, 1)
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 210.0
+offset_bottom = 147.0
+theme_override_font_sizes/font_size = 100
+text = "Play"
+
+[node name="QuitButton" type="Button" parent="."]
+layout_mode = 0
+offset_top = 503.0
+offset_right = 217.0
+offset_bottom = 648.0
+theme_override_font_sizes/font_size = 100
+text = "Quit"
+
+[node name="SettingsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 762.0
+offset_top = 501.0
+offset_right = 1157.0
+offset_bottom = 646.0
+theme_override_font_sizes/font_size = 100
+text = "Settings"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Fade")
+libraries = {
+&"": SubResource("AnimationLibrary_6bivr")
+}
+
+[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
