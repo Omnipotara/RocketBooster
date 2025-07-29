@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bss7x2rdftbpm"]
+[gd_scene load_steps=11 format=3 uid="uid://bss7x2rdftbpm"]
 
 [ext_resource type="Script" uid="uid://ckfbkgfu2fsav" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="ArrayMesh" uid="uid://dsjbstq7kjg1f" path="res://assets/raketa-lighter.obj" id="2_g2els"]
@@ -9,9 +9,12 @@
 [ext_resource type="PackedScene" uid="uid://co36sy4lfy3l" path="res://scenes/Particles/success_particles.tscn" id="7_smehm"]
 [ext_resource type="PackedScene" uid="uid://dcs11imexb86y" path="res://scenes/Particles/explosion_particles.tscn" id="8_ur7pv"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_g2els"]
-height = 3.07471
-radius = 0.533203
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_smehm"]
+height = 3.23478
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ur7pv"]
+radius = 0.266776
+height = 1.41414
 
 [node name="Player" type="RigidBody3D" groups=["landingPads"]]
 axis_lock_linear_z = true
@@ -28,8 +31,16 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("2_g2els")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34241, 0.196236)
-shape = SubResource("CylinderShape3D_g2els")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0173115, 1.40533, 0.196236)
+shape = SubResource("CapsuleShape3D_smehm")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.955742, 0.294207, 0, -0.294207, 0.955742, 0, 0, 0, 1, -0.55, 0.414, 0.196)
+shape = SubResource("CapsuleShape3D_ur7pv")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="."]
+transform = Transform3D(-0.955793, -0.29404, -8.74228e-08, -0.29404, 0.955793, 0, 8.35581e-08, 2.57058e-08, -1, 0.55, 0.414, 0.196)
+shape = SubResource("CapsuleShape3D_ur7pv")
 
 [node name="ExplosionAudio" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_dqkch")
