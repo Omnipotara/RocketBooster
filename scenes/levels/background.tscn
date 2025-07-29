@@ -1,18 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://xqffxgrqigsh"]
+[gd_scene load_steps=7 format=3 uid="uid://xqffxgrqigsh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rd3vj"]
 albedo_color = Color(0.529412, 0.360784, 0.239216, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4tcl0"]
-albedo_color = Color(0.270222, 0.270222, 0.270222, 1)
+albedo_color = Color(0.415686, 0.345098, 0.243137, 1)
 metallic = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dd0lh"]
 albedo_color = Color(0.662452, 0.662452, 0.662452, 1)
 roughness = 0.0
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_n602b"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_2q6dc"]
+sky_material = SubResource("ProceduralSkyMaterial_n602b")
+
+[sub_resource type="Environment" id="Environment_x0pi7"]
+background_mode = 1
+background_color = Color(0.103394, 0.0769744, 0.0235475, 1)
+sky = SubResource("Sky_2q6dc")
+ambient_light_source = 3
+tonemap_mode = 2
+glow_enabled = true
+
 [node name="Floor" type="CSGBox3D" groups=["fail"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.000340462, 0)
 use_collision = true
 size = Vector3(30, 8, 5)
 material = SubResource("StandardMaterial3D_rd3vj")
@@ -81,3 +95,11 @@ material = SubResource("StandardMaterial3D_rd3vj")
 transform = Transform3D(-0.281588, 0.959536, 0, -0.959536, -0.281588, 0, 0, 0, 1, 10.824, 16.7572, 0)
 size = Vector3(4, 10, 4)
 material = SubResource("StandardMaterial3D_rd3vj")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.984808, -0.111619, 0.133022, 0.0940336, 0.986798, 0.13186, -0.145984, -0.117349, 0.982302, 0, 0, 0)
+light_energy = 0.2
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_x0pi7")
