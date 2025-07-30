@@ -43,8 +43,10 @@ _data = {
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_hayap")
+metadata/_edit_vertical_guides_ = [571.0]
 
 [node name="Fade" type="ColorRect" parent="."]
+visible = false
 z_index = 10
 layout_mode = 0
 offset_left = -4.0
@@ -52,38 +54,38 @@ offset_right = 1160.0
 offset_bottom = 651.0
 color = Color(0, 0, 0, 1)
 
-[node name="PlayButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 1.0
-offset_top = 2.0
-offset_right = 210.0
-offset_bottom = 147.0
-theme_override_font_sizes/font_size = 100
-text = "Play"
-
-[node name="QuitButton" type="Button" parent="."]
-layout_mode = 0
-offset_top = 503.0
-offset_right = 217.0
-offset_bottom = 648.0
-theme_override_font_sizes/font_size = 100
-text = "Quit"
-
-[node name="SettingsButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 762.0
-offset_top = 501.0
-offset_right = 1157.0
-offset_bottom = 646.0
-theme_override_font_sizes/font_size = 100
-text = "Settings"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Fade")
 libraries = {
 &"": SubResource("AnimationLibrary_6bivr")
 }
 
-[connection signal="pressed" from="PlayButton" to="." method="_on_play_button_pressed"]
-[connection signal="pressed" from="QuitButton" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]
+[node name="VolumeSlider" type="HSlider" parent="."]
+layout_mode = 0
+offset_left = 359.0
+offset_top = 100.0
+offset_right = 786.0
+offset_bottom = 268.0
+value = 100.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 346.0
+offset_top = 97.0
+offset_right = 805.0
+offset_bottom = 174.0
+theme_override_font_sizes/normal_font_size = 56
+text = "Master Volume"
+fit_content = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 445.0
+offset_top = 496.0
+offset_right = 698.0
+offset_bottom = 618.0
+theme_override_font_sizes/font_size = 76
+text = "Back"
+
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

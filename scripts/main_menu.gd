@@ -4,8 +4,8 @@ extends Control
 @onready var quit_button: Button = $QuitButton
 @onready var settings_button: Button = $SettingsButton
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
-const LEVEL_1 = "res://scenes/levels/level1.tscn"
-const SETTINGS_MENU = "res://scenes/menus/settings_menu.tscn"
+const LEVEL_1 : String = "res://scenes/levels/level1.tscn"
+const SETTINGS_MENU : String = "res://scenes/menus/settings_menu.tscn"
 
 
 
